@@ -12,29 +12,30 @@ test("form header renders", async () => {
 });
 
 test("form shows success message on submit with form details", async () => {
-  const firstNameInput = screen.getByLabelText(/First Name:/i);
+  render(<CheckoutForm />);
+  const firstNameInput = screen.getByLabelText(/First Name/i);
   const lastNameInput = screen.getByLabelText(/Last Name/i);
   const addressInput = screen.getByLabelText(/Address/i);
   const cityInput = screen.getByLabelText(/City/i);
   const stateInput = screen.getByLabelText(/State/i);
   const zipInput = screen.getByLabelText(/Zip/i);
 
-  fireEvent.handleChanges(firstNameInput, {
+  fireEvent.change(firstNameInput, {
     target: { value: "Afton", name: "firstName" },
   });
-  fireEvent.handleChanges(lastNameInput, {
+  fireEvent.change(lastNameInput, {
     target: { value: "Slone", name: "lastName" },
   });
-  fireEvent.handleChanges(addressInput, {
+  fireEvent.change(addressInput, {
     target: { value: `24 Left Beaver Creek RD`, name: "address" },
   });
-  fireEvent.handleChanges(cityInput, {
+  fireEvent.change(cityInput, {
     target: { value: "Minnie", name: "city" },
   });
-  fireEvent.handleChanges(stateInput, {
+  fireEvent.change(stateInput, {
     target: { value: "KY", name: "state" },
   });
-  fireEvent.handleChanges(zipInput, {
+  fireEvent.change(zipInput, {
     target: { value: "41651", name: "zip" },
   });
 
@@ -42,7 +43,7 @@ test("form shows success message on submit with form details", async () => {
   fireEvent.click(button);
 
   const successMessage = await screen.findByText(
-    /`You have ordered some plants! Woo-hoo!`/i
+    /You have ordered some plants! Woo-hoo!/i
   );
   expect(successMessage).toBeTruthy();
 });
